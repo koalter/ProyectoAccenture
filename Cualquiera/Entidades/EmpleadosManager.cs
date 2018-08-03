@@ -16,8 +16,14 @@ namespace Entidades
             contexto = _contexto;
         }
 
+        public void UpdateContexto()
+        {
+            contexto = new CualquieraDBEntities();
+        }
+
         public void AgregarEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal)
         {
+            UpdateContexto();
             Empleado empleado = CrearEmpleado(id, nombre, apellido, ingreso, egreso, estado, telefono, cuil, sucursal);
             contexto.Empleadoes.Add(empleado);
             contexto.SaveChanges();
@@ -26,6 +32,7 @@ namespace Entidades
         public void AgregarEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal, int contraseña,
             int idencargado, int clave)
         {
+            UpdateContexto();
             Empleado empleado = CrearEmpleado(id, nombre, apellido, ingreso, egreso, estado, telefono, cuil, sucursal);
             Encargado encargado = CrearEncargado(id, idencargado, clave);
             empleado.Encargadoes.Add(encargado);
@@ -49,6 +56,7 @@ namespace Entidades
 
         public void BajaEmpleado(int idempleado)
         {
+            UpdateContexto();
             Empleado empleado = contexto.Empleadoes.Find(idempleado);
             contexto.Empleadoes.Remove(empleado);
             contexto.SaveChanges();
@@ -57,6 +65,7 @@ namespace Entidades
 
         public void EditarEstado(int idempleado, bool estado)
         {
+            UpdateContexto();
             Empleado empleado = contexto.Empleadoes.Find(idempleado);
             empleado.Estado = estado;
             contexto.SaveChanges();
@@ -64,6 +73,7 @@ namespace Entidades
 
         public bool ObtenerEstado(int empleadoid)
         {
+            UpdateContexto();
             Empleado empleado = contexto.Empleadoes.Find(empleadoid);
             if (empleado != null)
             {
@@ -74,6 +84,7 @@ namespace Entidades
 
         public bool ObtenerEsjefe(int empleadoId)
         {
+            UpdateContexto();
             Encargado encargado = contexto.Encargadoes.Find(empleadoId);
             if (encargado != null)
             {
@@ -84,6 +95,7 @@ namespace Entidades
 
         public void EditarSucursal(int idempleado, int idSucursal)
         {
+            UpdateContexto();
             Empleado empleado = contexto.Empleadoes.Find(idempleado);
             empleado.Id_Sucursal = idSucursal;
             contexto.SaveChanges();
@@ -91,6 +103,7 @@ namespace Entidades
 
         public void ListarEmpleados()
         {
+            UpdateContexto();
             List<Empleado> empleados = contexto.Empleadoes.ToList();
             Console.WriteLine("\t" + "Id" +
                    "\t" + "Nombre" +
