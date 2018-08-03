@@ -66,6 +66,7 @@ namespace Consola
 
         public bool ObtenerEsjefe(Empleado empleado)
         {
+            /*
             List<Empleado> empleados = contexto.Empleadoes.ToList();
             for (int i = 0; i < empleados.Count(); i++)
             {
@@ -74,6 +75,7 @@ namespace Consola
                     return empleado.EsJefe;
                 }
             }
+            */
             return false;
         }
 
