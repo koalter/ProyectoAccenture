@@ -1,0 +1,51 @@
+﻿@model IEnumerable<MCV_Cualquiera.Models.Empleado>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 15);
+}
+
+<link href="~/Content/EstilosGridBlue.css" rel="stylesheet" />
+
+<h2>Empleados</h2>
+
+<p>
+    @Html.ActionLink("Agregar Nuevo", "Create")
+</p>
+
+
+@grid.GetHtml(
+    fillEmptyRows: false,
+    tableStyle: "webgrid-table",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+
+    mode: WebGridPagerModes.All,
+    firstText: "<< Primera",
+    previousText: "< Anterior",
+    nextText: "Siguiente >",
+    lastText: "Última >>",
+
+columns: new[]
+{
+    grid.Column("ID",header:"Codigo"),
+    grid.Column("Apellido",header:"Apellido"),
+    grid.Column("Nombre",header:"Nombre"),
+    grid.Column("Fecha_de_Ingreso",header:"Fecha de Ingreso",format: (item) => string.Format("{0:dd/MM/yyyy}", item.Fecha_de_Ingreso)),
+    grid.Column("Fecha_de_Egreso",header:"Fecha de Egreso",format: (item) => string.Format("{0:dd/MM/yyyy}", item.Fecha_de_Egreso)),
+    grid.Column("Telefono",header:"Telefono"),
+    grid.Column("Cuil",header:"Cuil"),
+    grid.Column("Id_Sucursal",header:"Sucursal"),
+    grid.Column("",
+          header: "Acciones",
+          format: @<text>
+            @Html.ActionLink("Editar",   "Edit",   new { id=item.ID} )
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID } )
+        </text>
+    )
+
+ })
+
+</table>

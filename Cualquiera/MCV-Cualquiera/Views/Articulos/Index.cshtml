@@ -1,0 +1,55 @@
+﻿@model IEnumerable<MCV_Cualquiera.Models.Articulo>
+
+@{
+    ViewBag.Title = "Index";
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 15);
+}
+
+<link href="~/Content/EstilosGridBlue.css" rel="stylesheet" />
+
+<h2>Lista de Articulos</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar por Categoria: @Html.TextBox("buscarCategoria")
+        Buscar por Precio: @Html.TextBox("buscarPrecio")
+        <input type="submit" value="Buscar" class="btn-primary" />
+    </p>
+}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@grid.GetHtml(
+    fillEmptyRows: false,
+    tableStyle: "webgrid-table",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+
+    mode: WebGridPagerModes.All,
+    firstText: "<< Primera",
+    previousText: "< Anterior",
+    nextText: "Siguiente >",
+    lastText: "Última >>",
+
+columns: new[]
+{
+
+    grid.Column("articuloID",header:"ID del Producto"),
+    grid.Column("Nombre",header:"nombre"),
+    grid.Column("Descripcion",header:"descripcion"),
+    grid.Column("Precio",header:"precio"),
+    grid.Column("Categoria",header:"categoria"),
+    grid.Column("",
+          header: "Acciones",
+          format: @<text>
+            @Html.ActionLink("Editar",   "Edit",   new { id=item.articuloID} )
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.articuloID } )
+        </text>
+    )
+
+ })
+
+</table>
