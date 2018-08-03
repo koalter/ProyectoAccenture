@@ -16,11 +16,35 @@ namespace Consola
             contexto = _contexto;
         }
 
-        public void AgregarEmpleado(Empleado empleado)
+        public void AgregarEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal)
         {
+            Empleado empleado = CrearEmpleado(id, nombre, apellido, ingreso, egreso, estado, telefono, cuil, sucursal);
             contexto.Empleadoes.Add(empleado);
             contexto.SaveChanges();
             Console.WriteLine("empleado " + empleado.Id + " dado de alta");
+        }
+        public void AgregarEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal, int contraseña,
+            int idencargado, int clave)
+        {
+            Empleado empleado = CrearEmpleado(id, nombre, apellido, ingreso, egreso, estado, telefono, cuil, sucursal);
+            Encargado encargado = CrearEncargado(id, idencargado, clave);
+            empleado.Encargadoes.Add(encargado);
+            contexto.Empleadoes.Add(empleado);
+            contexto.SaveChanges();
+            Console.WriteLine("empleado " + empleado.Id + " dado de alta");
+        }
+
+        private Empleado CrearEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal)
+        {
+            return new Empleado(id, nombre, apellido, ingreso, egreso, estado, telefono, cuil, sucursal);
+        }
+        private Encargado CrearEncargado(int id, int idencargado, int clave)
+        {
+            Encargado encargado = new Encargado();
+            encargado.id_empleado = id;
+            encargado.id_encargado = idencargado;
+            encargado.clave = clave;
+            return encargado;
         }
 
         public void BajaEmpleado(int idempleado)
