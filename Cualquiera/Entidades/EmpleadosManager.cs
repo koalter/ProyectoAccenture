@@ -8,17 +8,10 @@ using Entidades;
 
 namespace Entidades
 {
-    class EmpleadosManager
+    class EmpleadosManager : Manager
     {
-        CualquieraDBEntities contexto;
-        public EmpleadosManager(CualquieraDBEntities _contexto)
+        public EmpleadosManager(CualquieraDBEntities _contexto) : base(_contexto)
         {
-            contexto = _contexto;
-        }
-
-        public void UpdateContexto()
-        {
-            contexto = new CualquieraDBEntities();
         }
 
         public void AgregarEmpleado(int id, string nombre, string apellido, DateTime ingreso, DateTime egreso, bool estado, string telefono, string cuil, int sucursal)

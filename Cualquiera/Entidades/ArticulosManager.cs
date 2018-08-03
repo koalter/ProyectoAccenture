@@ -6,40 +6,40 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class ArticulosManager
+    public class ArticulosManager : Manager
     {
-        CualquieraDBEntities contexto;
-        public ArticulosManager(CualquieraDBEntities _contexto)
+        
+        public ArticulosManager(CualquieraDBEntities _contexto) : base(_contexto)
         {
-            contexto = _contexto;
         }
 
-        public void AgregarArticulo(Articulo articulo, Stock stock)
+        public void AgregarArticulo(int param)
         {
-            if (articulo.articuloID == stock.IDArt)
-            {
-                contexto.Articulos.Add(articulo);
-                contexto.Stocks.Add(stock);
-                contexto.SaveChanges();
-                Console.WriteLine("articulo " + articulo.articuloID + " dado de alta");
-            }
-            else
-                Console.WriteLine("la id del articulo no corresponde con la id del stock");
+            UpdateContexto();
+            Stock stock = CrearStock();
+            Articulo articulo = CrearArticulo();
+            contexto.Articulos.Add(articulo);
+            contexto.Stocks.Add(stock);
+            contexto.SaveChanges();
+            Console.WriteLine("articulo " + articulo.articuloID + " dado de alta");
+        }
+
+        private Stock CrearStock()
+        {
+            return new Stock();
+        }
+        private Articulo CrearArticulo()
+        {
+            return new Articulo();
         }
 
         public void BajaArticulo(int idArticulo)
         {
-            List<Stock> stocks = contexto.Stocks.ToList();
-            for (int i = 0; i < stocks.Count(); i++)
-            {
-                if (stocks[i].Articulo.articuloID == idArticulo)
-                {
-                    contexto.Articulos.Remove(stocks[i].Articulo);
-                    contexto.Stocks.Remove(stocks[i]);
-                    Console.WriteLine("articulo " + stocks[i].Articulo.articuloID + " dado de baja");
-                    break;
-                }
-            }
+            UpdateContexto();
+            Stock stock = contexto.Stocks.Find(idArticulo);
+            contexto.Articulos.Remove(stock.Articulo);
+            contexto.Stocks.Remove(stock);
+            Console.WriteLine("articulo " + stock.Articulo.articuloID + " dado de baja");
             contexto.SaveChanges();
         }
 
@@ -50,23 +50,21 @@ namespace Entidades
 
         public List<Articulo> ListarArticulos()
         {
+            UpdateContexto();
             return contexto.Articulos.ToList();
         }
 
 
         public List<Articulo> BuscarArticulosPorCAtegoria(string pCategoria)
         {
-            List<Articulo> articulos = ListarArticulos();
-            List<Articulo> retorno = new List<Articulo>();
-
-            for (int i = 0; i < articulos.Count(); i++)
+            UpdateContexto();
+            List<Articulo> retorno = contexto.Articulos.Where(f => f.categoria == pCategoria).ToList();
+            int i = 0;
+            for (i = 0; i < retorno.Count(); i++)
             {
-                if (pCategoria == articulos[i].categoria)
-                {
-                    retorno.Add(articulos[i]);
-                }
+                retorno.Add(retorno[i]);
             }
-
+            Console.WriteLine(" " + i + " articulos encontrados en la categoria " + pCategoria);
             return retorno;
         }
     }

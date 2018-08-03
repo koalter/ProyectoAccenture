@@ -8,16 +8,15 @@ using Entidades;
 
 namespace Entidades
 {
-    class EventosManager
+    class EventosManager : Manager
     {
-        CualquieraDBEntities contexto;
-        public EventosManager(CualquieraDBEntities _contexto)
+        public EventosManager(CualquieraDBEntities _contexto) : base(_contexto)
         {
-            contexto = _contexto;
         }
 
         public void AgregarEvento(Evento evento)
         {
+            UpdateContexto();
             contexto.Eventos.Add(evento);
             contexto.SaveChanges();
             Console.WriteLine("evento " + evento.id_evento + " dado de alta");
@@ -25,6 +24,7 @@ namespace Entidades
 
         public List<Evento> ListarEventos()
         {
+            UpdateContexto();
             return contexto.Eventos.ToList();
         }
 

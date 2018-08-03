@@ -69,6 +69,7 @@
       <DependentUpon>ModelCualquiera.tt</DependentUpon>
     </Compile>
     <Compile Include="EventosManager.cs" />
+    <Compile Include="Manager.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="ModelCualquiera.Context.cs">
       <AutoGen>True</AutoGen>
