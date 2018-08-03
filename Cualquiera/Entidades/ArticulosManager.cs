@@ -8,36 +8,39 @@ namespace Entidades
 {
     public class ArticulosManager
     {
-        private List<Articulo> lista;
         CualquieraDBEntities contexto;
-        public ArticulosManager()
+        public ArticulosManager(CualquieraDBEntities _contexto)
         {
-            lista = new List<Articulo>();
-            contexto = new Entidades.CualquieraDBEntities();
+            contexto = _contexto;
         }
 
-        public void AgregarArticulo(Articulo articulo)
+        public void AgregarArticulo(Articulo articulo, Stock stock)
         {
-            // aca se sube un articulo a la base de datos
-            contexto.Articulos.Add(articulo);
-            contexto.SaveChanges();
-            lista.Add(articulo);
-        }
-
-        public void BajaArticulo(Articulo articuloId)
-        {
-            // aca se da la baja de un Articulo de la base de datos
-            List<Articulo> articulos = contexto.Articulos.ToList();
-            foreach (var item in articulos)
+            if (articulo.articuloID == stock.IDArt)
             {
-                if (item == articuloId)
+                contexto.Articulos.Add(articulo);
+                contexto.Stocks.Add(stock);
+                contexto.SaveChanges();
+                Console.WriteLine("articulo " + articulo.articuloID + " dado de alta");
+            }
+            else
+                Console.WriteLine("la id del articulo no corresponde con la id del stock");
+        }
+
+        public void BajaArticulo(int idArticulo)
+        {
+            List<Stock> stocks = contexto.Stocks.ToList();
+            for (int i = 0; i < stocks.Count(); i++)
+            {
+                if (stocks[i].Articulo.articuloID == idArticulo)
                 {
-                    contexto.Articulos.Remove(item);
-                    lista.Remove(item);
+                    contexto.Articulos.Remove(stocks[i].Articulo);
+                    contexto.Stocks.Remove(stocks[i]);
+                    Console.WriteLine("articulo " + stocks[i].Articulo.articuloID + " dado de baja");
                     break;
                 }
             }
-            Console.WriteLine("Articulo" + articuloId + "dado de baja");
+            contexto.SaveChanges();
         }
 
         public void EditarArticulo(int idArticulo)
@@ -45,7 +48,7 @@ namespace Entidades
 
         }
 
-        public List<Articulo> BuscarArticulo()
+        public List<Articulo> ListarArticulos()
         {
             return contexto.Articulos.ToList();
         }
@@ -53,7 +56,7 @@ namespace Entidades
 
         public List<Articulo> BuscarArticulosPorCAtegoria(string pCategoria)
         {
-            List<Articulo> articulos = BuscarArticulo();
+            List<Articulo> articulos = ListarArticulos();
             List<Articulo> retorno = new List<Articulo>();
 
             for (int i = 0; i < articulos.Count(); i++)

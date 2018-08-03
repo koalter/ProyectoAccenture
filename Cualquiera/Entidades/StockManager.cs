@@ -8,36 +8,34 @@ namespace Entidades
 {
     public class StockManager
     {
-        /*private List<Stock> lista;
+        /*
         CualquieraDBEntities contexto;
         public StockManager()
         {
-            lista = new List<Stock>();
             contexto = new Entidades.CualquieraDBEntities();
         }
 
-        public void AgregarStock(Stock articulo)
+        public void AgregarStock(Stock stock)
         {
             // aca se sube un articulo a la base de datos
-            contexto.Articulos.Add(articulo);
+            contexto.Articulos.Add(stock);
             contexto.SaveChanges();
-            lista.Add(articulo);
+            Console.WriteLine("stock " + stock.IDArt + " dado de alta");
         }
 
         public void BajaStock(int stockId)
         {
-            // aca se da la baja de un Articulo de la base de datos
-            List<Stock> Stock = contexto.Stock.ToList();
-            for (int i = 0; i < lista.Count(); i++)
+            List<Stock> stocks = contexto.Stocks.ToList();
+            for (int i = 0; i < stocks.Count(); i++)
             {
-                if (lista[i].Id == stockId)
+                if (stocks[i].IDArt == stockId)
                 {
-                    contexto.Stock.Remove(lista[i]);
-                    lista.Remove(lista[i]);
+                    contexto.Stocks.Remove(stocks[i]);
+                    Console.WriteLine("Stock" + stocks[i] + "dado de baja");
                     break;
                 }
             }
-            Console.WriteLine("Stock" + StockId + "dado de baja");
+            
         }
 
         public void EditarStock(int idStock)
@@ -47,7 +45,7 @@ namespace Entidades
 
         public List<Stock> BuscarStock()
         {
-            return contexto.Stock.toList();
+            return contexto.Stocks.toList();
         }
 
         public List<Stock> BuscarStockPorSucursal(int idSucursal)
@@ -63,6 +61,7 @@ namespace Entidades
             }
 
             return retorno;
-        }*/
+        }
+        */
     }
 }

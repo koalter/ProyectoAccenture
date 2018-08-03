@@ -61,12 +61,14 @@
     <Compile Include="Empleado.cs">
       <DependentUpon>ModelCualquiera.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpleadosManager.cs" />
     <Compile Include="Encargado.cs">
       <DependentUpon>ModelCualquiera.tt</DependentUpon>
     </Compile>
     <Compile Include="Evento.cs">
       <DependentUpon>ModelCualquiera.tt</DependentUpon>
     </Compile>
+    <Compile Include="EventosManager.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="ModelCualquiera.Context.cs">
       <AutoGen>True</AutoGen>
