@@ -64,18 +64,16 @@ namespace Consola
             return false;
         }
 
-        public bool ObtenerEsjefe(Empleado empleado)
+        public bool ObtenerEsjefe(int empleadoId)
         {
-            /*
-            List<Empleado> empleados = contexto.Empleadoes.ToList();
-            for (int i = 0; i < empleados.Count(); i++)
+            List<Encargado> encargados = contexto.Encargadoes.ToList();
+            for (int i = 0; i < encargados.Count(); i++)
             {
-                if (empleados[i].Id == empleado.Id)
+                if (encargados[i].id_empleado == empleadoId)
                 {
-                    return empleado.EsJefe;
+                    return true;
                 }
             }
-            */
             return false;
         }
 
