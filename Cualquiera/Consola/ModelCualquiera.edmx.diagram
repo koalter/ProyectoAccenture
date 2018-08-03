@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="74d6f71cde89411d8da8144afffeed4b" Name="Diagram1">
+        <EntityTypeShape EntityType="CualquieraDBModel.Articulo" Width="1.5" PointX="0.75" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.cliente" Width="1.5" PointX="5.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.Empleado" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.Encargado" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.Evento" Width="1.5" PointX="2.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.Stock" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CualquieraDBModel.Sucursal" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="CualquieraDBModel.FK__Stock__IDArt__1BFD2C07" ManuallyRouted="false" />
+        <AssociationConnector Association="CualquieraDBModel.FK_Empleado_Sucursal" ManuallyRouted="false" />
+        <AssociationConnector Association="CualquieraDBModel.FK_Encargado_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="CualquieraDBModel.FK__Stock__IDSuc__1CF15040" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
