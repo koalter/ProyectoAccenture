@@ -14,15 +14,21 @@ namespace Consola
             Menu menu = new Menu();
             Console.Title = "Comercio Cualquiera";
             int op = menu.Inicio();
-            if (op == 1)
+            
+            switch (op)
             {
-                menu.IngresarAdmin();
-                menu.MenuAdmin();
+                case 1:
+                    menu.IngresarAdmin();
+                    menu.MenuAdmin();
+                    break;
+                case 2:
+                    menu.MenuEmpleado();
+                    break;
+                default:
+                    Console.WriteLine("No hay mas");
+                    break;
             }
-            else
-            {
-                Console.WriteLine("No hay mas");
-            }
+
             Console.ReadKey();
         }
     }

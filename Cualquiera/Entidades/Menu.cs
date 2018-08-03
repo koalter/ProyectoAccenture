@@ -11,11 +11,13 @@ namespace Entidades
     {
         CualquieraDBEntities contexto;
         EmpleadosManager em;
+        ArticulosManager am;
 
         public Menu()
         {
             contexto = new CualquieraDBEntities();
             em = new EmpleadosManager(contexto);
+            am = new ArticulosManager(contexto);
         }
         public int Inicio()
         {
@@ -50,6 +52,9 @@ namespace Entidades
             {
                 Console.WriteLine("Bienvenido Admin !");
                 Console.WriteLine("1. Listar Empleados");
+                Console.WriteLine("2. Reubicar Empleado");
+                Console.WriteLine("3. Cambiar Estado de Empleado");
+                Console.WriteLine("4. Logs");
                 Console.WriteLine("9. Salir");
 
                 bool band = int.TryParse(Console.ReadLine(), out op);
@@ -68,11 +73,13 @@ namespace Entidades
                             }
                             break;
                         case 2:
+                        case 3:
+                        case 4:
+                            Console.WriteLine("Esta funcion aun no esta lista!");
                             break;
                         case 9:
                             return;
                         default:
-                            MenuAdmin();
                             break;
                     }
                 }
@@ -85,9 +92,47 @@ namespace Entidades
                 Console.Clear();
 
             } while (op != 9);
-            Console.ReadKey();
-            Console.Clear();
+            //Console.ReadKey();
+            //Console.Clear();
         }
+
+        public void MenuEmpleado()
+        {
+            Console.Write("Identifiquese: ");
+            string empleado = Console.ReadLine();
+            Console.Clear();
+            int op;
+            do
+            {
+                Console.WriteLine("Bienvenido {0} !", empleado);
+                Console.WriteLine("1. Listar Productos");
+                Console.WriteLine("9. Salir");
+
+                bool band = int.TryParse(Console.ReadLine(), out op);
+                if (band)
+                {
+                    switch (op)
+                    {
+                        case 1:
+                            Console.WriteLine("Esta funcion aun no esta lista!");
+                            break;
+                        case 9:
+                            return;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    op = -1;
+                    Console.WriteLine("Ingresó una opción incorrecta");
+                }
+                Console.ReadKey();
+                Console.Clear();
+
+            } while (op != 9);
+        }
+
         void dibujarInicio()
         {
             Console.WriteLine("¿Qué usuario es?");
