@@ -10,12 +10,12 @@ namespace Entidades
     public class Menu
     {
         CualquieraDBEntities contexto;
-        ArticulosManager am;
+        EmpleadosManager em;
 
         public Menu()
         {
             contexto = new CualquieraDBEntities();
-            am = new ArticulosManager(contexto);
+            em = new EmpleadosManager(contexto);
         }
         public int Inicio()
         {
@@ -60,7 +60,7 @@ namespace Entidades
                         case 1:
                             try
                             {
-                                am.ListarArticulos();
+                                em.ListarEmpleados();
                             }
                             catch(Exception e)
                             {

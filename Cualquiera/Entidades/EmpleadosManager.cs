@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Entidades;
 
 
-namespace Consola
+namespace Entidades
 {
     class EmpleadosManager
     {
