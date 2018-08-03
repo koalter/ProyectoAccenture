@@ -49,68 +49,43 @@ namespace Entidades
 
         public void BajaEmpleado(int idempleado)
         {
-            List<Empleado> empleados = contexto.Empleadoes.ToList();
-            for (int i = 0 ; i < empleados.Count(); i++)
-            {
-                if (empleados[i].Id == idempleado)
-                {
-                    contexto.Empleadoes.Remove(empleados[i]);
-                    Console.WriteLine("empleado " + empleados[i].Id + " dado de baja");
-                    break;
-                }
-            }
+            Empleado empleado = contexto.Empleadoes.Find(idempleado);
+            contexto.Empleadoes.Remove(empleado);
+            contexto.SaveChanges();
+            Console.WriteLine("empleado " + empleado.Id + " dado de baja");
+        }
+
+        public void EditarEstado(int idempleado, bool estado)
+        {
+            Empleado empleado = contexto.Empleadoes.Find(idempleado);
+            empleado.Estado = estado;
             contexto.SaveChanges();
         }
 
-        public void EditarEstado(Empleado empleado, bool estado)
+        public bool ObtenerEstado(int empleadoid)
         {
-            List<Empleado> empleados = contexto.Empleadoes.ToList();
-            for (int i = 0; i < empleados.Count(); i++)
+            Empleado empleado = contexto.Empleadoes.Find(empleadoid);
+            if (empleado != null)
             {
-                if (empleados[i].Id == empleado.Id)
-                {
-                    empleado.Estado = estado;
-                }
-            }
-            contexto.SaveChanges();
-        }
-
-        public bool ObtenerEstado(Empleado empleado)
-        {
-            List<Empleado> empleados = contexto.Empleadoes.ToList();
-            for (int i = 0; i < empleados.Count(); i++)
-            {
-                if (empleados[i].Id == empleado.Id)
-                {
-                    return empleado.Estado;
-                }
+                return empleado.Estado;
             }
             return false;
         }
 
         public bool ObtenerEsjefe(int empleadoId)
         {
-            List<Encargado> encargados = contexto.Encargadoes.ToList();
-            for (int i = 0; i < encargados.Count(); i++)
+            Encargado encargado = contexto.Encargadoes.Find(empleadoId);
+            if (encargado != null)
             {
-                if (encargados[i].id_empleado == empleadoId)
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         }
 
-        public void EditarSucursal(Empleado empleado, int idSucursal)
+        public void EditarSucursal(int idempleado, int idSucursal)
         {
-            List<Empleado> empleados = contexto.Empleadoes.ToList();
-            for (int i = 0; i < empleados.Count(); i++)
-            {
-                if (empleados[i].Id == empleado.Id)
-                {
-                    empleado.Id_Sucursal = idSucursal;
-                }
-            }
+            Empleado empleado = contexto.Empleadoes.Find(idempleado);
+            empleado.Id_Sucursal = idSucursal;
             contexto.SaveChanges();
         }
 
