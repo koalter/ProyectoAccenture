@@ -11,12 +11,13 @@ namespace Consola
     {
         static void Main(string[] args)
         {
+            Menu menu = new Menu();
             Console.Title = "Comercio Cualquiera";
-            int op = Menu.Inicio();
+            int op = menu.Inicio();
             if (op == 1)
             {
-                Menu.IngresarAdmin();
-                Menu.MenuAdmin();
+                menu.IngresarAdmin();
+                menu.MenuAdmin();
             }
             else
             {

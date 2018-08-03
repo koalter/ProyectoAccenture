@@ -3,26 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entidades;
 
 namespace Entidades
 {
     public class Menu
     {
-        public static int Inicio()
+        CualquieraDBEntities contexto;
+        ArticulosManager am;
+
+        public Menu()
         {
-            Menu.dibujarInicio();
+            contexto = new CualquieraDBEntities();
+            am = new ArticulosManager(contexto);
+        }
+        public int Inicio()
+        {
+            dibujarInicio();
             int op;
             while (!(int.TryParse(Console.ReadLine(), out op)) || (op != 1 && op != 2)) //si es letra, y ninguna opcion entra
             {
                 Console.WriteLine("Ingreso una opción incorrecta");
                 Console.ReadKey();
                 Console.Clear();
-                Menu.dibujarInicio();
+                dibujarInicio();
             }
             Console.WriteLine("Entraste como {0}", op);
             return op;
         }
-        public static void IngresarAdmin()
+        public void IngresarAdmin()
         {
             Console.Write("Ingrese la contraseña (1111): ");
             while (Console.ReadLine() != Convert.ToString(1111))
@@ -34,7 +43,7 @@ namespace Entidades
             }
             Console.Clear();
         }
-        public static void MenuAdmin()
+        public void MenuAdmin()
         {
             int op;
             do
@@ -49,12 +58,21 @@ namespace Entidades
                     switch (op)
                     {
                         case 1:
-                            MenuAdmin();
+                            try
+                            {
+                                am.ListarArticulos();
+                            }
+                            catch(Exception e)
+                            {
+                                Console.WriteLine(e.ToString());
+                            }
                             break;
                         case 2:
                             break;
+                        case 9:
+                            return;
                         default:
-                            op = 9;
+                            MenuAdmin();
                             break;
                     }
                 }
@@ -70,7 +88,7 @@ namespace Entidades
             Console.ReadKey();
             Console.Clear();
         }
-        static void dibujarInicio()
+        void dibujarInicio()
         {
             Console.WriteLine("¿Qué usuario es?");
             Console.WriteLine("1. Administrador");

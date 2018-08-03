@@ -114,9 +114,32 @@ namespace Consola
             contexto.SaveChanges();
         }
 
-        public List<Empleado> ListarEmpleados()
+        public void ListarEmpleados()
         {
-            return contexto.Empleadoes.ToList();
+            List<Empleado> empleados = contexto.Empleadoes.ToList();
+            Console.WriteLine("\t" + "Id" +
+                   "\t" + "Nombre" +
+                   "\t" + "Apellido" +
+                   "\t" + "Cuil" +
+                   "\t" + "Estado" +
+                   "\t" + "Telefono" +
+                   "\t" + "Sucursal" +
+                   "\t" + "Fecha_de_Ingreso" +
+                   "\t" + "Fecha_de_Egreso" +
+                   "\t" + "Encargadoes");
+            foreach (Empleado empleado in empleados)
+            {
+                Console.WriteLine("\t" + empleado.Id +
+                    "\t" + empleado.Nombre +
+                    "\t" + empleado.Apellido +
+                    "\t" + empleado.Cuil +
+                    "\t" + empleado.Estado +
+                    "\t" + empleado.Telefono +
+                    "\t" + empleado.Sucursal + 
+                    "\t" + empleado.Fecha_de_Ingreso +
+                    "\t" + empleado.Fecha_de_Egreso +
+                    "\t" + empleado.Encargadoes);
+            }
         }
 
     }
