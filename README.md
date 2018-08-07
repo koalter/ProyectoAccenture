@@ -11,7 +11,7 @@ Es el proyecto final de la marca "Cualquiera"
 
 ## Integrantes - Equipo CSharp
 
-| Issue         | Points        |           
+|               |               |
 | ------------- |:-------------:|
 | Erik Steg         | [![GitHub followers](https://img.shields.io/github/followers/ErkST.svg?style=social&label=Follow)](https://github.com/ErkST) |
 | Facundo De Paul   | [![GitHub followers](https://img.shields.io/github/followers/FacuDePaul.svg?style=social&label=Follow)](https://github.com/FacuDePaul) |
@@ -24,6 +24,12 @@ Es el proyecto final de la marca "Cualquiera"
 
 ---
 
+## Dependencias
+
+Este proyecto necesita `Microsoft® SQL Server® 2014 Express` y `Microsoft® SQL Server® 2014 Management Studio`
+https://www.microsoft.com/en-us/download/details.aspx?id=42299
+
+---
 
 ## Issues - User Stories
 
